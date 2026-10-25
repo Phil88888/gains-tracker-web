@@ -93,6 +93,12 @@
   const meter = document.querySelector(".meter span");
   const slides = [...document.querySelectorAll(".slide img")];
 
+  const pinProgress = (section) => {
+    const r = section.getBoundingClientRect();
+    return Math.min(Math.max(-r.top / (section.offsetHeight - innerHeight), 0), 1);
+  };
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+
   const onScroll = () => {
     const y = scrollY;
     const max = root.scrollHeight - innerHeight;
@@ -106,19 +112,45 @@
       el.style.transform = `translateX(${p * 30 * Number(el.dataset.drift)}vw)`;
     });
 
-    const g = gallery.getBoundingClientRect();
-    const travel = gallery.offsetHeight - innerHeight;
-    const p = Math.min(Math.max(-g.top / travel, 0), 1);
+    /* The rail always enters from the right, even on wide screens where all six cards fit */
+    const p = pinProgress(gallery);
     const distance = rail.scrollWidth - innerWidth;
-    rail.style.transform = `translateX(${-p * Math.max(distance, 0)}px)`;
+    const from = innerWidth * 0.75;
+    const to = distance > 0 ? -distance : -distance / 2;
+    rail.style.transform = `translateX(${from + (to - from) * ease(p)}px)`;
     meter.style.transform = `scaleX(${p})`;
     const mid = innerWidth / 2;
     slides.forEach((img) => {
       const b = img.getBoundingClientRect();
-      const off = Math.abs(b.left + b.width / 2 - mid) / innerWidth;
-      img.style.setProperty("--s", (1.06 - Math.min(off, 0.6) * 0.18).toFixed(3));
+      const side = (b.left + b.width / 2 - mid) / innerWidth;
+      const off = Math.min(Math.abs(side), 0.6);
+      img.style.setProperty("--s", (1.06 - off * 0.2).toFixed(3));
+      img.style.setProperty("--ry", `${(-side * 28).toFixed(1)}deg`);
+      img.style.setProperty("--o", (1 - off * 0.9).toFixed(2));
     });
+
+    if (custom) customStep(pinProgress(custom));
   };
+
+  /* Own exercise: the scroll types the description, the AI picks a movement, then the result appears */
+  const custom = document.querySelector(".custom");
+  const typeName = custom?.querySelector("[data-type='name']");
+  const typeDesc = custom?.querySelector("[data-type='desc']");
+  const steps = custom ? [...custom.querySelectorAll(".step")] : [];
+  const customStep = (q) => {
+    const fill = (el, t) => { const full = el.dataset.text; el.textContent = full.slice(0, Math.round(full.length * Math.min(Math.max(t, 0), 1))); };
+    fill(typeName, q / 0.08);
+    fill(typeDesc, (q - 0.08) / 0.2);
+    const stage = q < 0.3 ? 0 : q < 0.55 ? 1 : q < 0.8 ? 2 : 3;
+    custom.dataset.stage = stage;
+    steps.forEach((s, i) => s.classList.toggle("on", i === stage));
+    custom.style.setProperty("--scan", Math.min(Math.max((q - 0.3) / 0.25, 0), 1));
+  };
+  if (custom && calm) {
+    typeName.textContent = typeName.dataset.text;
+    typeDesc.textContent = typeDesc.dataset.text;
+    custom.dataset.stage = 3;
+  }
   let queued = false;
   addEventListener("scroll", () => {
     if (queued) return;

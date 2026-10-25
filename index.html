@@ -31,6 +31,7 @@
   <nav aria-label="Hauptmenü">
     <a href="#funktionen">Funktionen</a>
     <a href="#highlights">Highlights</a>
+    <a href="#eigene">Eigene Übungen</a>
     <a href="#daten">Deine Daten</a>
     <a href="#hilfe">Hilfe</a>
   </nav>
@@ -66,8 +67,8 @@
   <!-- Running band -->
   <div class="band" id="band" aria-hidden="true">
     <div class="track">
-      <span>99 Übungen animiert</span><i>✦</i><span>Steigerung automatisch</span><i>✦</i><span>26 Challenges</span><i>✦</i><span>Wettkampf mit Freunden</span><i>✦</i><span>Kein Tracking</span><i>✦</i><span>Ohne Werbung</span><i>✦</i>
-      <span>99 Übungen animiert</span><i>✦</i><span>Steigerung automatisch</span><i>✦</i><span>26 Challenges</span><i>✦</i><span>Wettkampf mit Freunden</span><i>✦</i><span>Kein Tracking</span><i>✦</i><span>Ohne Werbung</span><i>✦</i>
+      <span>99 Übungen animiert</span><i>✦</i><span>Steigerung automatisch</span><i>✦</i><span>26 Challenges</span><i>✦</i><span>Wettkampf mit Freunden</span><i>✦</i><span>Eigene Übungen mit KI</span><i>✦</i><span>Kein Tracking</span><i>✦</i><span>Ohne Werbung</span><i>✦</i>
+      <span>99 Übungen animiert</span><i>✦</i><span>Steigerung automatisch</span><i>✦</i><span>26 Challenges</span><i>✦</i><span>Wettkampf mit Freunden</span><i>✦</i><span>Eigene Übungen mit KI</span><i>✦</i><span>Kein Tracking</span><i>✦</i><span>Ohne Werbung</span><i>✦</i>
     </div>
   </div>
 
@@ -104,6 +105,53 @@
         <figure class="slide"><img src="assets/screens/4-rangliste.jpg" alt="Rangliste mit Freunden" loading="lazy" width="600" height="1300"><figcaption><b>04</b> Rangliste mit Freunden</figcaption></figure>
         <figure class="slide"><img src="assets/screens/5-challenges.jpg" alt="Challenges mit Abzeichen" loading="lazy" width="600" height="1300"><figcaption><b>05</b> Challenges mit Abzeichen</figcaption></figure>
         <figure class="slide"><img src="assets/screens/6-eigene-uebung.jpg" alt="Eigene Übungen mit KI" loading="lazy" width="600" height="1300"><figcaption><b>06</b> Eigene Übungen mit KI</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Own exercise with AI: scroll-driven demo -->
+  <section class="custom" id="eigene" data-stage="0" aria-labelledby="c-title">
+    <div class="custom-pin">
+      <div class="custom-copy">
+        <p class="eyebrow">Eigene Übungen mit KI</p>
+        <h2 class="display" id="c-title">Deine Übung fehlt?<br><em>Beschreib sie.</em></h2>
+        <ol class="steps">
+          <li class="step on"><b>01</b><div><h3>Beschreiben</h3><p>Name und Ablauf in deinen Worten: Haltung, Gerät, Bewegung. Ein Foto vom Gerät hilft zusätzlich.</p></div></li>
+          <li class="step"><b>02</b><div><h3>KI ordnet zu</h3><p>Die KI vergleicht deine Beschreibung mit 99 Bewegungsabläufen, wählt den passendsten und passt den Griff an.</p></div></li>
+          <li class="step"><b>03</b><div><h3>Animation und Muskeln</h3><p>Du bekommst die Animation, Haupt- und Hilfsmuskeln und einen kurzen Tipp zur Ausführung. Passt etwas nicht, erstellst du sie neu.</p></div></li>
+          <li class="step"><b>04</b><div><h3>In deiner Übungsdatenbank</h3><p>Gespeichert wie jede andere Übung: im Plan, mit Verlauf, Bestwerten und Steigerung. Mit Konto auf all deinen Geräten.</p><span class="soon">Geplant: eigene Übungen mit der Community teilen</span></div></li>
+        </ol>
+      </div>
+
+      <div class="custom-demo" aria-hidden="true">
+        <div class="demo-head"><span>Eigene Übung</span><img src="assets/gains-tracker-zeichen.svg" alt="" width="28" height="28"></div>
+        <label>Name</label>
+        <div class="field"><span data-type="name" data-text="Landmine Press"></span><i class="caret"></i></div>
+        <label>Beschreibung</label>
+        <div class="field tall"><span data-type="desc" data-text="Langhantel schräg in der Ecke, stehend einarmig nach vorne oben drücken."></span><i class="caret"></i></div>
+        <div class="demo-btn">Neu erstellen</div>
+
+        <div class="demo-stage">
+          <div class="ai">
+            <p class="ai-label">Vergleicht mit 99 Bewegungsabläufen</p>
+            <ul class="ai-list">
+              <li>Bankdrücken</li><li>Kurzhantel-Schulterdrücken</li><li>Schrägbankdrücken</li><li>Arnold Press</li>
+              <li class="hit">Schulterdrücken Langhantel stehend</li>
+              <li>Seitheben</li><li>Frontheben</li><li>Dips</li>
+            </ul>
+            <div class="ai-scan"></div>
+          </div>
+          <div class="result">
+            <p class="ai-label red-label">Vorschlag</p>
+            <div class="figure"><img src="assets/screens/6-eigene-uebung.jpg" alt="" loading="lazy"></div>
+            <p class="from">Animation von: Schulterdrücken Langhantel stehend · Griff: Langhantel</p>
+            <div class="chips">
+              <span class="main">Vordere Schulter</span><span class="main">Seitliche Schulter</span>
+              <span>Trizeps</span><span>Trapez</span><span>Bauch</span>
+            </div>
+          </div>
+          <div class="saved"><b>✓</b><div><strong>Übung gespeichert</strong><span>Kommt in „Brust“ · in deiner Übungsdatenbank</span></div></div>
+        </div>
       </div>
     </div>
   </section>
