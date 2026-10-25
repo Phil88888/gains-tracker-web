@@ -1,7 +1,13 @@
-/* Gains Tracker – Bewegung der Webseite. Ohne fremde Bibliotheken, damit keine Daten an Dritte gehen. */
+/* Gains Tracker – Bewegung der Webseite. Ohne fremde Bibliotheken, damit keine Daten an Dritte gehen.
+   Leitlinien: Animationen starten in der Mitte des Bildschirms (nicht schon am unteren Rand), und alles,
+   was am Scrollen hängt, rechnet nur mit gemerkten Massen und einer geglätteten Scroll-Position. */
 (() => {
   const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const root = document.documentElement;
+  const clamp = (v, a = 0, b = 1) => Math.min(Math.max(v, a), b);
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  /* the middle band of the screen: things reveal when they reach it */
+  const CENTER = { rootMargin: "-28% 0px -28% 0px", threshold: 0 };
 
   /* Split headings into letters so each one can rise out of its mask */
   const splitText = (el, baseMs) => {
@@ -37,33 +43,7 @@
     }, 1500);
   }
 
-  /* Reveal blocks as they enter the screen, staggered inside each section */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("on");
-      io.unobserve(entry.target);
-    });
-  }, { threshold: 0.18, rootMargin: "0px 0px -6% 0px" });
-  document.querySelectorAll("section, footer").forEach((section) => {
-    section.querySelectorAll("[data-reveal], [data-wipe]").forEach((el, i) => {
-      el.style.setProperty("--rd", `${Math.min(i, 6) * 90}ms`);
-      if (el.hasAttribute("data-reveal")) io.observe(el);
-    });
-  });
-
-  /* A fully clipped element never counts as visible, so wipes watch their list instead */
-  const wipeIo = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll(":scope > [data-wipe]").forEach((el) => el.classList.add("on"));
-      wipeIo.unobserve(entry.target);
-    });
-  }, { threshold: 0.15 });
-  new Set([...document.querySelectorAll("[data-wipe]")].map((el) => el.parentElement)).forEach((list) => wipeIo.observe(list));
-  document.querySelectorAll(".mega .split").forEach((el) => io.observe(el));
-
-  /* Counters run up once they are visible */
+  /* One observer for everything that appears once: blocks, wipe lists, split headings, counters, clips */
   const countUp = (el) => {
     const target = Number(el.dataset.count);
     if (calm || target === 0) { el.textContent = target; return; }
@@ -75,92 +55,143 @@
     };
     requestAnimationFrame(tick);
   };
-  const countIo = new IntersectionObserver((entries) => {
+  const show = (el) => {
+    if (el.dataset.count !== undefined) countUp(el);
+    else if (el.matches("[data-wipe-list]")) el.querySelectorAll(":scope > [data-wipe]").forEach((w) => w.classList.add("on"));
+    else el.classList.add("on");
+  };
+  const pending = new Set();
+  const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      countUp(entry.target);
-      countIo.unobserve(entry.target);
+      show(entry.target);
+      pending.delete(entry.target);
+      io.unobserve(entry.target);
     });
-  }, { threshold: 0.6 });
-  document.querySelectorAll("[data-count]").forEach((el) => countIo.observe(el));
+  }, CENTER);
+  const watch = (el) => { pending.add(el); io.observe(el); };
+  document.querySelectorAll("section, footer").forEach((section) => {
+    section.querySelectorAll("[data-reveal], [data-wipe]").forEach((el, i) => {
+      el.style.setProperty("--rd", `${Math.min(i, 6) * 90}ms`);
+      if (el.hasAttribute("data-reveal")) watch(el);
+    });
+  });
+  /* a fully clipped element never counts as visible, so wipes watch their list instead */
+  new Set([...document.querySelectorAll("[data-wipe]")].map((el) => el.parentElement)).forEach((list) => { list.setAttribute("data-wipe-list", ""); watch(list); });
+  document.querySelectorAll(".mega .split, [data-count]").forEach(watch);
+  const clips = [...document.querySelectorAll(".clip")];
+  clips.forEach((c, i) => { c.querySelector(".screen").style.transitionDelay = `${(i % 4) * 120}ms`; watch(c); });
+  /* the last blocks of the page never reach the middle: show them once the end is reached */
+  const flushAtEnd = (y) => {
+    if (!pending.size || y < root.scrollHeight - innerHeight - 4) return;
+    pending.forEach((el) => { show(el); io.unobserve(el); });
+    pending.clear();
+  };
 
-  /* Scroll-linked motion: progress bar, nav, drifting statement, pinned gallery */
+  /* ---------- Scroll-linked motion ---------- */
   const bar = document.querySelector(".progress");
   const nav = document.querySelector(".nav");
   const drifters = [...document.querySelectorAll("[data-drift]")];
   const gallery = document.querySelector(".gallery");
   const rail = document.querySelector(".rail");
   const meter = document.querySelector(".meter span");
-  const slides = [...document.querySelectorAll(".slide img")];
-
-  const pinProgress = (section) => {
-    const r = section.getBoundingClientRect();
-    return Math.min(Math.max(-r.top / (section.offsetHeight - innerHeight), 0), 1);
-  };
-  const ease = (t) => 1 - Math.pow(1 - t, 3);
-
-  const onScroll = () => {
-    const y = scrollY;
-    const max = root.scrollHeight - innerHeight;
-    bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-    nav.classList.toggle("solid", y > 40);
-    if (calm) return;
-
-    drifters.forEach((el) => {
-      const r = el.getBoundingClientRect();
-      const p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
-      el.style.transform = `translateX(${p * 30 * Number(el.dataset.drift)}vw)`;
-    });
-
-    /* The rail always enters from the right, even on wide screens where all six cards fit */
-    const p = pinProgress(gallery);
-    const distance = rail.scrollWidth - innerWidth;
-    const from = innerWidth * 0.75;
-    const to = distance > 0 ? -distance : -distance / 2;
-    rail.style.transform = `translateX(${from + (to - from) * ease(p)}px)`;
-    meter.style.transform = `scaleX(${p})`;
-    const mid = innerWidth / 2;
-    slides.forEach((img) => {
-      const b = img.getBoundingClientRect();
-      const side = (b.left + b.width / 2 - mid) / innerWidth;
-      const off = Math.min(Math.abs(side), 0.6);
-      img.style.setProperty("--s", (1.06 - off * 0.2).toFixed(3));
-      img.style.setProperty("--ry", `${(-side * 28).toFixed(1)}deg`);
-      img.style.setProperty("--o", (1 - off * 0.9).toFixed(2));
-    });
-
-    if (custom) customStep(pinProgress(custom));
-  };
-
-  /* Own exercise: the scroll types the description, the AI picks a movement, then the result appears */
+  const slides = [...document.querySelectorAll(".slide")].map((fig) => ({ fig, img: fig.querySelector("img") }));
   const custom = document.querySelector(".custom");
   const typeName = custom?.querySelector("[data-type='name']");
   const typeDesc = custom?.querySelector("[data-type='desc']");
   const steps = custom ? [...custom.querySelectorAll(".step")] : [];
-  const customStep = (q) => {
-    const fill = (el, t) => { const full = el.dataset.text; el.textContent = full.slice(0, Math.round(full.length * Math.min(Math.max(t, 0), 1))); };
-    fill(typeName, q / 0.08);
-    fill(typeDesc, (q - 0.08) / 0.2);
-    const stage = q < 0.3 ? 0 : q < 0.55 ? 1 : q < 0.8 ? 2 : 3;
-    custom.dataset.stage = stage;
-    steps.forEach((s, i) => s.classList.toggle("on", i === stage));
-    custom.style.setProperty("--scan", Math.min(Math.max((q - 0.3) / 0.25, 0), 1));
+  const live = document.querySelector(".live");
+
+  /* Measured once (and on resize), so a frame never asks the browser for layout */
+  let M = {};
+  const docTop = (el) => el.getBoundingClientRect().top + scrollY;
+  const measure = () => {
+    M = {
+      vh: innerHeight, vw: innerWidth, max: root.scrollHeight - innerHeight,
+      drift: drifters.map((el) => ({ el, mid: docTop(el) + el.offsetHeight / 2, k: Number(el.dataset.drift) })),
+      gTop: docTop(gallery), gH: gallery.offsetHeight, railW: rail.scrollWidth,
+      slideMid: slides.map(({ fig }) => fig.offsetLeft + fig.offsetWidth / 2),
+      cTop: custom ? docTop(custom) : 0, cH: custom ? custom.offsetHeight : 1,
+      lMid: live ? docTop(live) + live.offsetHeight / 2 : 0,
+    };
   };
+
+  let solid = null, lastStage = -1, lastName = -1, lastDesc = -1;
+  const render = (y) => {
+    const isSolid = y > 40;
+    if (isSolid !== solid) { solid = isSolid; nav.classList.toggle("solid", isSolid); }
+    if (calm) return;
+
+    M.drift.forEach(({ el, mid, k }) => {
+      const p = (mid - y - M.vh / 2) / M.vh;
+      el.style.transform = `translate3d(${(p * 30 * k).toFixed(2)}vw,0,0)`;
+    });
+
+    /* the rail always enters from the right, even on wide screens where all six cards fit */
+    const gp = clamp((y - M.gTop) / (M.gH - M.vh));
+    const distance = M.railW - M.vw;
+    const from = M.vw * 0.75, to = distance > 0 ? -distance : -distance / 2;
+    const x = from + (to - from) * ease(gp);
+    rail.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`;
+    meter.style.transform = `scaleX(${gp.toFixed(4)})`;
+    if (y > M.gTop - M.vh && y < M.gTop + M.gH) {
+      slides.forEach(({ img }, i) => {
+        const side = (M.slideMid[i] + x - M.vw / 2) / M.vw;
+        const off = Math.min(Math.abs(side), 0.6);
+        img.style.transform = `translate3d(0,0,0) rotateY(${(-side * 26).toFixed(1)}deg) scale(${(1.05 - off * 0.2).toFixed(3)})`;
+        img.style.opacity = (1 - off * 0.9).toFixed(2);
+      });
+    }
+
+    if (custom && y > M.cTop - M.vh && y < M.cTop + M.cH) {
+      const q = clamp((y - M.cTop) / (M.cH - M.vh));
+      const n = Math.round(typeName.dataset.text.length * clamp(q / 0.08));
+      const d = Math.round(typeDesc.dataset.text.length * clamp((q - 0.08) / 0.2));
+      if (n !== lastName) { lastName = n; typeName.textContent = typeName.dataset.text.slice(0, n); }
+      if (d !== lastDesc) { lastDesc = d; typeDesc.textContent = typeDesc.dataset.text.slice(0, d); }
+      const stage = q < 0.3 ? 0 : q < 0.55 ? 1 : q < 0.8 ? 2 : 3;
+      if (stage !== lastStage) { lastStage = stage; custom.dataset.stage = stage; steps.forEach((s, i) => s.classList.toggle("on", i === stage)); }
+      custom.style.setProperty("--scan", clamp((q - 0.3) / 0.25).toFixed(3));
+    }
+
+    /* desktop: the clips float at different speeds */
+    if (live && M.vw > 900) {
+      const p = (M.lMid - y - M.vh / 2) / M.vh;
+      clips.forEach((c) => { c.style.transform = `translate3d(0,${(p * 90 * Number(c.dataset.depth)).toFixed(1)}px,0)`; });
+    }
+  };
+
+  /* Smoothed scroll: the motion follows the finger with a short glide instead of jumping frame to frame */
+  let target = scrollY, current = scrollY, running = false;
+  const frame = () => {
+    current += (target - current) * 0.2;
+    if (Math.abs(target - current) < 0.5) current = target;
+    render(current);
+    if (current !== target) requestAnimationFrame(frame);
+    else running = false;
+  };
+  const kick = () => { if (!running) { running = true; requestAnimationFrame(frame); } };
+  addEventListener("scroll", () => {
+    target = scrollY;
+    bar.style.transform = `scaleX(${M.max > 0 ? (target / M.max).toFixed(4) : 0})`;
+    flushAtEnd(target);
+    kick();
+  }, { passive: true });
+  let resizeTimer;
+  const remeasure = () => { measure(); target = current = scrollY; render(current); };
+  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(remeasure, 120); });
+  addEventListener("load", remeasure);
+  document.fonts?.ready.then(remeasure);
+  measure();
+  render(current);
+
   if (custom && calm) {
     typeName.textContent = typeName.dataset.text;
     typeDesc.textContent = typeDesc.dataset.text;
     custom.dataset.stage = 3;
   }
-  let queued = false;
-  addEventListener("scroll", () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(() => { onScroll(); queued = false; });
-  }, { passive: true });
-  addEventListener("resize", onScroll);
-  onScroll();
 
-  /* Menu on phones: a circle opens from the button */
+  /* ---------- Menu on phones: a circle opens from the button ---------- */
   const menuBtn = document.querySelector(".menu-btn");
   const menu = document.getElementById("menu");
   const setMenu = (open) => {
@@ -174,8 +205,7 @@
   addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
   menu.addEventListener("transitionend", () => { if (!document.body.classList.contains("menu-open")) menu.hidden = true; });
 
-  /* Videos load when they come close and only play while visible (battery, data) */
-  const videos = [...document.querySelectorAll("video")];
+  /* ---------- Videos load when they come close and only play while visible ---------- */
   const videoIo = new IntersectionObserver((entries) => {
     entries.forEach(({ target: v, isIntersecting }) => {
       if (isIntersecting) {
@@ -184,43 +214,27 @@
       } else v.pause();
     });
   }, { threshold: 0.35 });
-  videos.forEach((v) => { if (calm) v.removeAttribute("autoplay"); videoIo.observe(v); });
+  document.querySelectorAll("video").forEach((v) => { if (calm) v.removeAttribute("autoplay"); videoIo.observe(v); });
 
-  /* Clips rise in one after another */
-  const clips = [...document.querySelectorAll(".clip")];
-  const clipIo = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("on");
-      clipIo.unobserve(entry.target);
-    });
-  }, { threshold: 0.2 });
-  clips.forEach((c, i) => { c.querySelector(".screen").style.transitionDelay = `${(i % 4) * 120}ms`; clipIo.observe(c); });
-
-  /* Phone carousel: dots follow the swipe */
-  const rail2 = document.querySelector(".clips");
+  /* ---------- Phone carousel: dots follow the swipe ---------- */
+  const strip = document.querySelector(".clips");
   const dots = [...document.querySelectorAll(".dots span")];
-  rail2?.addEventListener("scroll", () => {
-    const mid = rail2.scrollLeft + rail2.clientWidth / 2;
-    let best = 0, bestD = Infinity;
-    clips.forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < bestD) { bestD = d; best = i; } });
-    dots.forEach((d, i) => d.classList.toggle("on", i === best));
+  let dotQueued = false;
+  strip?.addEventListener("scroll", () => {
+    if (dotQueued) return;
+    dotQueued = true;
+    requestAnimationFrame(() => {
+      dotQueued = false;
+      const mid = strip.scrollLeft + strip.clientWidth / 2;
+      let best = 0, bestD = Infinity;
+      clips.forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < bestD) { bestD = d; best = i; } });
+      dots.forEach((d, i) => d.classList.toggle("on", i === best));
+    });
   }, { passive: true });
-
-  /* Desktop: the clips float at different speeds while scrolling */
-  const live = document.querySelector(".live");
-  const floatClips = () => {
-    if (calm || innerWidth <= 900 || !live) return;
-    const r = live.getBoundingClientRect();
-    const p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
-    clips.forEach((c) => c.style.setProperty("--py", `${(p * 90 * Number(c.dataset.depth)).toFixed(1)}px`));
-  };
-  addEventListener("scroll", () => requestAnimationFrame(floatClips), { passive: true });
-  floatClips();
 
   if (calm || !matchMedia("(pointer: fine)").matches) return;
 
-  /* Phone follows the mouse a little */
+  /* ---------- Pointer extras (desktop only) ---------- */
   const tilt = document.querySelector("[data-tilt]");
   const phone = tilt.querySelector(".phone");
   const chips = [...tilt.querySelectorAll("[data-float]")];
@@ -231,8 +245,6 @@
     phone.style.setProperty("--rx", `${4 - yy * 10}deg`);
     chips.forEach((c, i) => { c.style.translate = `${x * (i ? -22 : 22)}px ${yy * 18}px`; });
   });
-
-  /* Spotlight inside feature cards */
   document.querySelectorAll(".card").forEach((card) => {
     card.addEventListener("pointermove", (e) => {
       const r = card.getBoundingClientRect();
@@ -240,8 +252,6 @@
       card.style.setProperty("--my", `${e.clientY - r.top}px`);
     });
   });
-
-  /* Buttons lean towards the pointer */
   document.querySelectorAll(".btn").forEach((btn) => {
     btn.addEventListener("pointermove", (e) => {
       const r = btn.getBoundingClientRect();
