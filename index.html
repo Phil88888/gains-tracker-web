@@ -13,7 +13,7 @@
 <meta property="og:description" content="Jede Übung als Animation, dein nächstes Gewicht mit Begründung, Wettkampf mit Freunden.">
 <meta property="og:image" content="assets/screens/1-training.jpg">
 <meta property="og:locale" content="de_CH">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v=20261025d">
 </head>
 <body>
 
@@ -93,6 +93,54 @@
     <p class="slide-r red" data-drift="1">am Gerät.</p>
   </section>
 
+  <!-- A flexed arm holds the phone and logs sets (drawn in the app's anatomy style: grey body, red working muscle) -->
+  <section class="lift" aria-labelledby="lift-title">
+    <div class="lift-copy">
+      <p class="eyebrow" data-reveal>Satz fertig?</p>
+      <h2 class="display" id="lift-title" data-reveal>Zwei Tipps.<br><em>Eingetragen.</em></h2>
+      <p class="lead" data-reveal>Die App schlägt das Gewicht vom letzten Mal vor. Du bestätigst nur – noch mit der Hantel in Reichweite.</p>
+      <ul class="lift-points" data-reveal>
+        <li>Gewicht vorgeschlagen</li><li>Satzpause startet von selbst</li><li>Bestwert wird erkannt</li>
+      </ul>
+    </div>
+    <div class="lift-scene" aria-hidden="true">
+      <div class="ls-glow"></div>
+      <div class="ls-phone">
+        <div class="ls-screen">
+          <div class="ls-top"><b>Bankdrücken</b><span>Ziel 3 × 8–12</span></div>
+          <div class="ls-hint">Vorschlag heute <b>80 × 10</b></div>
+          <div class="ls-row"><i>1</i><span class="kg"></span><em>×</em><span class="rep"></span><u>✓</u></div>
+          <div class="ls-row"><i>2</i><span class="kg"></span><em>×</em><span class="rep"></span><u>✓</u></div>
+          <div class="ls-row"><i>3</i><span class="kg"></span><em>×</em><span class="rep"></span><u>✓</u></div>
+          <div class="ls-rest">Pause <b>1:30</b></div>
+          <div class="ls-pr"><b>★ Neuer Bestwert</b><span>82.5 kg × 10</span></div>
+        </div>
+      </div>
+      <svg class="ls-arm" viewBox="0 0 400 480">
+        <defs>
+          <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a4a52"/><stop offset="1" stop-color="#26262b"/></linearGradient>
+          <radialGradient id="muscle" cx=".45" cy=".35" r=".7"><stop offset="0" stop-color="#ff6b5e"/><stop offset=".55" stop-color="#d7372f"/><stop offset="1" stop-color="#8f1716"/></radialGradient>
+          <linearGradient id="fore" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#2c2c31"/><stop offset="1" stop-color="#4a4a52"/></linearGradient>
+        </defs>
+        <g class="arm-bob">
+          <path class="upper" d="M-40 478 L-40 400 C0 360 60 338 110 344 C150 349 178 368 196 392 C208 410 212 432 204 452 C160 472 60 480 -40 480 Z" fill="url(#skin)"/>
+          <path class="biceps" d="M-10 404 C20 370 70 352 112 356 C140 359 162 372 176 390 C150 408 60 414 -10 414 Z" fill="url(#muscle)"/>
+          <path d="M-20 432 C60 426 130 422 196 432" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="2"/>
+          <circle cx="194" cy="438" r="24" fill="#2b2b30"/>
+          <path class="forearm" d="M168 430 C172 392 200 352 236 312 C248 300 270 296 284 306 L300 326 C296 340 284 350 270 360 C240 390 222 420 214 456 C200 462 178 452 168 430 Z" fill="url(#fore)"/>
+          <path d="M184 420 C192 386 216 352 248 322" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="14" stroke-linecap="round"/>
+          <ellipse cx="268" cy="334" rx="44" ry="30" fill="#3a3a41" transform="rotate(-35 268 334)"/>
+          <rect x="196" y="232" width="30" height="19" rx="9.5" fill="#46464d" stroke="rgba(0,0,0,.3)"/>
+          <rect x="193" y="255" width="32" height="19" rx="9.5" fill="#424249" stroke="rgba(0,0,0,.3)"/>
+          <rect x="195" y="278" width="30" height="19" rx="9.5" fill="#3e3e45" stroke="rgba(0,0,0,.3)"/>
+          <rect x="200" y="300" width="26" height="17" rx="8.5" fill="#3a3a41" stroke="rgba(0,0,0,.3)"/>
+          <g class="thumb"><path d="M238 334 C246 306 262 286 282 276 C292 272 300 280 296 290 C288 306 276 322 264 344 Z" fill="#4c4c54"/><ellipse cx="288" cy="280" rx="8" ry="6" fill="#5a5a62" transform="rotate(-30 288 280)"/></g>
+        </g>
+        <circle class="tap-ring" cx="288" cy="276" r="10" fill="none" stroke="#e2453f" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+
   <!-- Live clips recorded from the app (docs/web-videos/aufnehmen.cjs in the app project) -->
   <section class="live" id="live" aria-labelledby="live-title">
     <div class="live-head">
@@ -118,6 +166,17 @@
       <div class="stat" data-reveal><b data-count="26">0</b><h3>Challenges</h3><p>Vom Klimmzug-Club bis zur längsten Plank, mit eigenen Abzeichen in Bronze, Silber, Gold und Legende.</p></div>
       <div class="stat" data-reveal><b data-count="4">0</b><h3>Sprachen</h3><p>Deutsch, Englisch, Französisch und Italienisch, inklusive aller Anleitungen und Muskelnamen.</p></div>
       <div class="stat" data-reveal><b data-count="0" class="zero">0</b><h3>Tracker, null Werbung</h3><p>Ohne Konto bleibt alles auf deinem Handy. Keine Werbung, keine Analyse-Dienste, kein Verkauf von Daten.</p></div>
+    </div>
+    <div class="barbell" aria-hidden="true">
+      <svg viewBox="0 0 800 170">
+        <g class="bb-lift">
+          <rect x="30" y="78" width="740" height="14" rx="7" fill="#8b8b93"/>
+          <rect x="180" y="70" width="14" height="30" rx="3" fill="#b9b9c0"/><rect x="606" y="70" width="14" height="30" rx="3" fill="#b9b9c0"/>
+          <g class="plates-l"><rect class="pl" x="146" y="15" width="24" height="140" rx="5" fill="#a31c1b"/><rect class="pl" x="122" y="28" width="20" height="114" rx="5" fill="#2a2a2f" stroke="#e2453f" stroke-width="2"/><rect class="pl" x="102" y="44" width="16" height="82" rx="4" fill="#c4c4cb"/></g>
+          <g class="plates-r"><rect class="pl" x="630" y="15" width="24" height="140" rx="5" fill="#a31c1b"/><rect class="pl" x="658" y="28" width="20" height="114" rx="5" fill="#2a2a2f" stroke="#e2453f" stroke-width="2"/><rect class="pl" x="682" y="44" width="16" height="82" rx="4" fill="#c4c4cb"/></g>
+        </g>
+      </svg>
+      <p>Scheiben immer aussen auf der Stange – wie in der App</p>
     </div>
   </section>
 
@@ -261,6 +320,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=20261025d"></script>
 </body>
 </html>

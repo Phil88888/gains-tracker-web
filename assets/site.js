@@ -78,7 +78,7 @@
   });
   /* a fully clipped element never counts as visible, so wipes watch their list instead */
   new Set([...document.querySelectorAll("[data-wipe]")].map((el) => el.parentElement)).forEach((list) => { list.setAttribute("data-wipe-list", ""); watch(list); });
-  document.querySelectorAll(".mega .split, [data-count]").forEach(watch);
+  document.querySelectorAll(".mega .split, [data-count], .barbell").forEach(watch);
   const clips = [...document.querySelectorAll(".clip")];
   clips.forEach((c, i) => { c.querySelector(".screen").style.transitionDelay = `${(i % 4) * 120}ms`; watch(c); });
   /* the last blocks of the page never reach the middle: show them once the end is reached */
@@ -123,8 +123,10 @@
     if (calm) return;
 
     M.drift.forEach(({ el, mid, k }) => {
-      const p = (mid - y - M.vh / 2) / M.vh;
-      el.style.transform = `translate3d(${(p * 30 * k).toFixed(2)}vw,0,0)`;
+      /* slides in from the side and comes to rest once it reaches the middle, so it stays readable */
+      const p = clamp((mid - y - M.vh / 2) / M.vh, 0, 1);
+      el.style.transform = `translate3d(${(p * 40 * k).toFixed(2)}vw,0,0)`;
+      el.style.opacity = (1 - p * 0.9).toFixed(2);
     });
 
     /* the rail always enters from the right, even on wide screens where all six cards fit */
@@ -189,6 +191,44 @@
     typeName.textContent = typeName.dataset.text;
     typeDesc.textContent = typeDesc.dataset.text;
     custom.dataset.stage = 3;
+  }
+
+  /* ---------- The arm logs three sets, then a new record; runs only while visible ---------- */
+  const scene = document.querySelector(".lift-scene");
+  if (scene) {
+    const rows = [...scene.querySelectorAll(".ls-row")];
+    const SETS = [["80", "10"], ["80", "10"], ["82.5", "10"]];
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    let visible = false, running = false;
+    const tap = async () => { scene.classList.add("tap"); await sleep(170); scene.classList.remove("tap"); };
+    const type = async (el, text) => { el.classList.add("typing"); for (const ch of text) { el.textContent += ch; await tap(); await sleep(110); } el.classList.remove("typing"); };
+    const reset = () => { rows.forEach((r) => { r.classList.remove("done", "active"); r.querySelectorAll("span").forEach((s) => { s.textContent = ""; }); }); scene.classList.remove("rest", "pr"); };
+    const play = async () => {
+      if (running) return;
+      running = true;
+      while (visible) {
+        reset();
+        await sleep(500);
+        for (let i = 0; i < rows.length && visible; i++) {
+          rows[i].classList.add("active");
+          await type(rows[i].querySelector(".kg"), SETS[i][0]);
+          await sleep(150);
+          await type(rows[i].querySelector(".rep"), SETS[i][1]);
+          await sleep(200); await tap();
+          rows[i].classList.replace("active", "done");
+          scene.classList.add("rest"); await sleep(900); scene.classList.remove("rest");
+        }
+        if (!visible) break;
+        scene.classList.add("pr"); await sleep(2200);
+      }
+      running = false;
+    };
+    if (calm) {
+      rows.forEach((r, i) => { r.classList.add("done"); r.querySelector(".kg").textContent = SETS[i][0]; r.querySelector(".rep").textContent = SETS[i][1]; });
+      scene.classList.add("pr");
+    } else {
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) play(); }, { threshold: 0.4 }).observe(scene);
+    }
   }
 
   /* ---------- Menu on phones: a circle opens from the button ---------- */
