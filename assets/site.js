@@ -160,6 +160,64 @@
   addEventListener("resize", onScroll);
   onScroll();
 
+  /* Menu on phones: a circle opens from the button */
+  const menuBtn = document.querySelector(".menu-btn");
+  const menu = document.getElementById("menu");
+  const setMenu = (open) => {
+    document.body.classList.toggle("menu-open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Menü schliessen" : "Menü öffnen");
+    if (open) menu.hidden = false;
+  };
+  menuBtn.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
+  menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+  addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+  menu.addEventListener("transitionend", () => { if (!document.body.classList.contains("menu-open")) menu.hidden = true; });
+
+  /* Videos load when they come close and only play while visible (battery, data) */
+  const videos = [...document.querySelectorAll("video")];
+  const videoIo = new IntersectionObserver((entries) => {
+    entries.forEach(({ target: v, isIntersecting }) => {
+      if (isIntersecting) {
+        if (!v.src && v.dataset.src) v.src = v.dataset.src;
+        if (!calm) v.play().catch(() => {});
+      } else v.pause();
+    });
+  }, { threshold: 0.35 });
+  videos.forEach((v) => { if (calm) v.removeAttribute("autoplay"); videoIo.observe(v); });
+
+  /* Clips rise in one after another */
+  const clips = [...document.querySelectorAll(".clip")];
+  const clipIo = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("on");
+      clipIo.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+  clips.forEach((c, i) => { c.querySelector(".screen").style.transitionDelay = `${(i % 4) * 120}ms`; clipIo.observe(c); });
+
+  /* Phone carousel: dots follow the swipe */
+  const rail2 = document.querySelector(".clips");
+  const dots = [...document.querySelectorAll(".dots span")];
+  rail2?.addEventListener("scroll", () => {
+    const mid = rail2.scrollLeft + rail2.clientWidth / 2;
+    let best = 0, bestD = Infinity;
+    clips.forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < bestD) { bestD = d; best = i; } });
+    dots.forEach((d, i) => d.classList.toggle("on", i === best));
+  }, { passive: true });
+
+  /* Desktop: the clips float at different speeds while scrolling */
+  const live = document.querySelector(".live");
+  const floatClips = () => {
+    if (calm || innerWidth <= 900 || !live) return;
+    const r = live.getBoundingClientRect();
+    const p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+    clips.forEach((c) => c.style.setProperty("--py", `${(p * 90 * Number(c.dataset.depth)).toFixed(1)}px`));
+  };
+  addEventListener("scroll", () => requestAnimationFrame(floatClips), { passive: true });
+  floatClips();
+
   if (calm || !matchMedia("(pointer: fine)").matches) return;
 
   /* Phone follows the mouse a little */

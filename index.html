@@ -36,7 +36,20 @@
     <a href="#hilfe">Hilfe</a>
   </nav>
   <a class="pill" href="#start">Bald im Store</a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü öffnen"><span></span><span></span></button>
 </header>
+
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menü">
+    <a href="#live"><small>01</small>Live aus der App</a>
+    <a href="#highlights"><small>02</small>Highlights</a>
+    <a href="#funktionen"><small>03</small>Funktionen</a>
+    <a href="#eigene"><small>04</small>Eigene Übungen</a>
+    <a href="#daten"><small>05</small>Deine Daten</a>
+    <a href="#hilfe"><small>06</small>Hilfe</a>
+  </nav>
+  <p class="menu-foot">Gains Tracker · Bald im App Store</p>
+</div>
 
 <main id="top">
 
@@ -57,7 +70,7 @@
       </div>
     </div>
     <div class="hero-phone" data-tilt>
-      <div class="phone"><img src="assets/screens/1-training.jpg" alt="Trainingsseite von Gains Tracker mit Brusttag und Bankdrücken als Animation" width="600" height="1300"></div>
+      <div class="phone screen"><video src="assets/video/training.mp4" poster="assets/video/training.jpg" muted loop playsinline autoplay preload="auto" aria-label="Trainingsseite von Gains Tracker: Brusttag mit Bankdrücken als Animation"></video><i class="glint" aria-hidden="true"></i></div>
       <div class="chip c1" data-float><b>80 × 11</b><span>Vorschlag heute</span></div>
       <div class="chip c2" data-float><b>Rang Gold</b><span>86.9 t diesen Monat</span></div>
     </div>
@@ -76,6 +89,22 @@
   <section class="statement" aria-label="Leitsatz">
     <p class="slide-l" data-drift="-1">Kein Rätselraten</p>
     <p class="slide-r red" data-drift="1">am Gerät.</p>
+  </section>
+
+  <!-- Live clips recorded from the app (docs/web-videos/aufnehmen.cjs in the app project) -->
+  <section class="live" id="live" aria-labelledby="live-title">
+    <div class="live-head">
+      <p class="eyebrow" data-reveal>Live aus der App</p>
+      <h2 class="display" id="live-title" data-reveal>Nicht gezeichnet.<br><em>Echt aufgenommen.</em></h2>
+      <p class="lead" data-reveal>So sieht Gains Tracker auf dem Handy aus – jede Animation läuft genau so in der App.</p>
+    </div>
+    <div class="clips" tabindex="0" aria-label="Videos aus der App, seitlich wischen">
+      <figure class="clip" data-depth="1"><div class="screen"><video data-src="assets/video/uebung.mp4" poster="assets/video/uebung.jpg" muted loop playsinline preload="none" aria-label="Übungsseite Bankdrücken mit Animation und Anleitung"></video><i class="glint" aria-hidden="true"></i></div><figcaption><b>01</b> Übung mit Anleitung</figcaption></figure>
+      <figure class="clip" data-depth="-1"><div class="screen"><video data-src="assets/video/bibliothek.mp4" poster="assets/video/bibliothek.jpg" muted loop playsinline preload="none" aria-label="Übungsbibliothek mit 99 animierten Übungen"></video><i class="glint" aria-hidden="true"></i></div><figcaption><b>02</b> 99 Übungen, alle animiert</figcaption></figure>
+      <figure class="clip" data-depth="1.4"><div class="screen"><video data-src="assets/video/fortschritt.mp4" poster="assets/video/fortschritt.jpg" muted loop playsinline preload="none" aria-label="Fortschritt mit Muskelkarte, Serie und Kalender"></video><i class="glint" aria-hidden="true"></i></div><figcaption><b>03</b> Fortschritt und Serie</figcaption></figure>
+      <figure class="clip" data-depth="-0.6"><div class="screen"><video data-src="assets/video/rangliste.mp4" poster="assets/video/rangliste.jpg" muted loop playsinline preload="none" aria-label="Rangliste mit Gold-Abzeichen"></video><i class="glint" aria-hidden="true"></i></div><figcaption><b>04</b> Rang und Rangliste</figcaption></figure>
+    </div>
+    <div class="dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span></div>
   </section>
 
   <!-- Highlights with counters -->
@@ -123,6 +152,10 @@
         </ol>
       </div>
 
+      <figure class="custom-real">
+        <div class="screen"><video data-src="assets/video/eigene.mp4" poster="assets/video/eigene.jpg" muted loop playsinline preload="none" aria-label="Eigene Übung in der App erstellen: Name und Beschreibung eintippen, Animation erstellen"></video><i class="glint" aria-hidden="true"></i></div>
+        <figcaption>So sieht es in der App aus</figcaption>
+      </figure>
       <div class="custom-demo" aria-hidden="true">
         <div class="demo-head"><span>Eigene Übung</span><img src="assets/gains-tracker-zeichen.svg" alt="" width="28" height="28"></div>
         <label>Name</label>
@@ -161,14 +194,14 @@
     <p class="eyebrow" data-reveal>Funktionen</p>
     <h2 class="display" id="f-title" data-reveal>Alles, was ein<br><em>Trainingsbuch braucht.</em></h2>
     <div class="grid">
-      <article class="card" data-reveal><span class="no">01</span><h3>Animation und Muskelkarte</h3><p>Startposition, Endposition, sauberer Ablauf. Pausieren oder in Zeitlupe ansehen, wenn du die Technik genau sehen willst.</p></article>
-      <article class="card" data-reveal><span class="no">02</span><h3>Plan und Steigerung</h3><p>Ziel, Trainingstage und Ausrüstung wählen, der Plan steht. Bei jeder Übung steht, mit welchem Gewicht und wie vielen Wiederholungen du weitermachst, und warum.</p></article>
-      <article class="card" data-reveal><span class="no">03</span><h3>Sätze in Sekunden</h3><p>Die App schlägt die Gewichte vom letzten Mal vor. Aufwärmsätze, Drop-Sets, Sätze bis zum Versagen, Supersätze und Übungen auf Zeit mit einem Tipp.</p></article>
-      <article class="card" data-reveal><span class="no">04</span><h3>Erholung auf einen Blick</h3><p>Die Muskelkarte zeigt, welche Muskeln bereit sind und welche noch Pause brauchen. Nach sechs harten Wochen schlägt die App eine leichte Woche vor.</p></article>
-      <article class="card" data-reveal><span class="no">05</span><h3>Anleitung und Geräte</h3><p>Schritt-für-Schritt-Anleitung, häufige Fehler, leichtere und schwerere Varianten. Sitzhöhe und Polster speicherst du direkt bei der Übung, der Scheibenrechner zeigt die Scheiben.</p></article>
-      <article class="card" data-reveal><span class="no">06</span><h3>Tagesform und Beschwerden</h3><p>An schlechten Tagen schlägt die App weniger Gewicht vor. Das Schmerz-Tagebuch hilft, Beschwerden im Blick zu behalten.</p></article>
-      <article class="card" data-reveal><span class="no">07</span><h3>Wissen und Einsteiger-Kurs</h3><p>Kurze Artikel, ein Muskel-Lexikon, ein Eiweiss- und Kalorienrechner und ein Kurs mit zwölf Lektionen für die ersten Wochen im Gym.</p></article>
-      <article class="card" data-reveal><span class="no">08</span><h3>Watch, Health, Import</h3><p>Sätze an der Apple Watch erfassen, Trainings in Apple Health oder Health Connect speichern, Verlauf aus Strong oder Hevy übernehmen.</p></article>
+      <article class="card" data-reveal><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a2 2 0 1 0 0 .1M8 21l2-7-3-3 5-3 5 3-3 3 2 7M5 11l3-3M19 11l-3-3"/></svg><span class="no">01</span><h3>Animation und Muskelkarte</h3><p>Startposition, Endposition, sauberer Ablauf. Pausieren oder in Zeitlupe ansehen, wenn du die Technik genau sehen willst.</p></article>
+      <article class="card" data-reveal><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M5 16l4-5 4 3 6-8M15 6h4v4"/></svg><span class="no">02</span><h3>Plan und Steigerung</h3><p>Ziel, Trainingstage und Ausrüstung wählen, der Plan steht. Bei jeder Übung steht, mit welchem Gewicht und wie vielen Wiederholungen du weitermachst, und warum.</p></article>
+      <article class="card" data-reveal><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10M18 16l2 2 3-4"/></svg><span class="no">03</span><h3>Sätze in Sekunden</h3><p>Die App schlägt die Gewichte vom letzten Mal vor. Aufwärmsätze, Drop-Sets, Sätze bis zum Versagen, Supersätze und Übungen auf Zeit mit einem Tipp.</p></article>
+      <article class="card" data-reveal><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg><span class="no">04</span><h3>Erholung auf einen Blick</h3><p>Die Muskelkarte zeigt, welche Muskeln bereit sind und welche noch Pause brauchen. Nach sechs harten Wochen schlägt die App eine leichte Woche vor.</p></article>
+      <article class="card" data-reveal><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H4zM8 20h8M12 16v4M8 8h8M8 12h5"/></svg><span class="no">05</span><h3>Anleitung und Geräte</h3><p>Schritt-für-Schritt-Anleitung, häufige Fehler, leichtere und schwerere Varianten. Sitzhöhe und Polster speicherst du direkt bei der Übung, der Scheibenrechner zeigt die Scheiben.</p></article>
+      <article class="card" data-reveal><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg><span class="no">06</span><h3>Tagesform und Beschwerden</h3><p>An schlechten Tagen schlägt die App weniger Gewicht vor. Das Schmerz-Tagebuch hilft, Beschwerden im Blick zu behalten.</p></article>
+      <article class="card" data-reveal><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4zM20 5h-5a3 3 0 0 0-3 3"/></svg><span class="no">07</span><h3>Wissen und Einsteiger-Kurs</h3><p>Kurze Artikel, ein Muskel-Lexikon, ein Eiweiss- und Kalorienrechner und ein Kurs mit zwölf Lektionen für die ersten Wochen im Gym.</p></article>
+      <article class="card" data-reveal><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l1 4H7zM7 17h10l-1 4H8zM6 7h12v10H6zM12 10v3l2 1"/></svg><span class="no">08</span><h3>Watch, Health, Import</h3><p>Sätze an der Apple Watch erfassen, Trainings in Apple Health oder Health Connect speichern, Verlauf aus Strong oder Hevy übernehmen.</p></article>
     </div>
   </section>
 

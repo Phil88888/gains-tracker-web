@@ -61,6 +61,7 @@ h1, h2, h3, p { margin: 0; }
 .eyebrow, .kicker { font: 600 13px/1.5 var(--cond); letter-spacing: .32em; text-transform: uppercase; color: var(--mute); }
 .display { font: 700 clamp(40px, 7vw, 92px)/.95 var(--serif); letter-spacing: -.01em; text-transform: uppercase; margin-top: 14px; }
 .display em { font-style: normal; color: var(--crimson-hi); }
+@media (max-width: 600px) { .display { font-size: clamp(30px, 8.4vw, 44px); } .display.small { font-size: 28px; } }
 .display.small { font-size: clamp(28px, 4vw, 44px); margin: 0 0 14px; }
 .lead { color: var(--mute); font-size: clamp(16px, 1.5vw, 19px); max-width: 46ch; }
 .lead.center { margin: 28px auto 0; text-align: center; }
@@ -152,6 +153,101 @@ section { position: relative; }
 .slide figcaption { margin-top: 16px; font: 600 15px var(--cond); letter-spacing: .14em; text-transform: uppercase; display: flex; gap: 12px; }
 .slide figcaption b { color: var(--crimson-hi); }
 @media (max-width: 700px) { .slide { width: 58vw; } .slide img { max-height: 58svh; width: auto; } }
+
+/* ---------- Phone screens with recorded video ---------- */
+.screen { position: relative; aspect-ratio: 390 / 844; overflow: hidden; border-radius: 30px; background: #111; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 40px 80px rgba(0,0,0,.5), 0 0 0 8px rgba(0,0,0,.35); }
+.screen video, .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; display: block; }
+.glint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.14) 48%, transparent 60%); transform: translateX(-120%); animation: glint 7s ease-in-out infinite; }
+@keyframes glint { 0%, 70% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+.phone.screen { aspect-ratio: 390 / 844; border-radius: 34px; }
+
+/* ---------- Live clips ---------- */
+.live { padding: 14vh 0 12vh; overflow: hidden; background: radial-gradient(80% 60% at 50% 30%, rgba(163,28,27,.12), transparent 70%), var(--charcoal); }
+.live-head { padding: 0 var(--gutter); max-width: 900px; }
+.live-head .lead { margin-top: 20px; }
+.clips { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2.4vw, 36px); padding: 8vh var(--gutter) 0; align-items: start; }
+.clip { margin: 0; transform: translateY(var(--py, 0px)); will-change: transform; }
+.clip:nth-child(even) { margin-top: 10vh; }
+.clip figcaption { margin-top: 18px; font: 600 15px var(--cond); letter-spacing: .14em; text-transform: uppercase; display: flex; gap: 12px; }
+.clip figcaption b { color: var(--crimson-hi); }
+.clip .screen { opacity: 0; transform: translateY(60px) scale(.94) rotate(var(--rot, 0deg)); transition: opacity .9s ease, transform 1.2s var(--ease); }
+.clip.on .screen { opacity: 1; transform: rotate(var(--rot, 0deg)); }
+.clip:nth-child(1) { --rot: -2deg; } .clip:nth-child(2) { --rot: 1.5deg; } .clip:nth-child(3) { --rot: -1deg; } .clip:nth-child(4) { --rot: 2deg; }
+.dots { display: none; }
+@media (max-width: 900px) {
+  .clips { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; padding: 6vh 16px 8px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .clips::-webkit-scrollbar { display: none; }
+  .clip { flex: 0 0 66vw; max-width: 300px; scroll-snap-align: center; transform: none !important; }
+  .clip:nth-child(even) { margin-top: 0; }
+  .clip:first-child { margin-left: 8vw; } .clip:last-child { margin-right: 8vw; }
+  .dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+  .dots span { width: 8px; height: 8px; border-radius: 99px; background: var(--line); transition: width .3s var(--ease), background .3s; }
+  .dots span.on { width: 26px; background: var(--crimson-hi); }
+}
+
+/* ---------- Real recording in the own-exercise section ---------- */
+.custom-real { display: none; margin: 0; }
+.custom-real figcaption { margin-top: 12px; text-align: center; font: 600 13px var(--cond); letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+@media (min-width: 1200px) {
+  .custom .custom-pin { grid-template-columns: 1fr 240px minmax(320px, 400px); gap: 4vw; }
+  .custom-real { display: block; }
+  .custom-real .screen { max-height: 70svh; aspect-ratio: 390 / 844; width: auto; margin: 0 auto; }
+}
+
+/* ---------- Feature icons drawn on reveal ---------- */
+.ico { width: 34px; height: 34px; fill: none; stroke: var(--crimson-hi); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; display: block; margin-bottom: 18px; }
+.ico path { stroke-dasharray: 120; stroke-dashoffset: 120; transition: stroke-dashoffset 1.8s var(--ease) .3s; }
+.card.on .ico path { stroke-dashoffset: 0; }
+.card .no { position: absolute; top: 26px; right: 22px; }
+.card h3 { margin-top: 18px; }
+
+/* ---------- Mobile menu ---------- */
+.menu-btn { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: transparent; position: relative; cursor: pointer; flex: none; }
+.menu-btn span { position: absolute; left: 13px; right: 13px; height: 1.5px; background: var(--cream); transition: transform .4s var(--ease), top .4s var(--ease); }
+.menu-btn span:first-child { top: 17px; } .menu-btn span:last-child { top: 25px; }
+.menu-open .menu-btn span:first-child { top: 21px; transform: rotate(45deg); }
+.menu-open .menu-btn span:last-child { top: 21px; transform: rotate(-45deg); }
+.menu { position: fixed; inset: 0; z-index: 45; background: var(--forest); display: flex; flex-direction: column; justify-content: center; padding: 90px 24px 40px; clip-path: circle(0% at calc(100% - 40px) 40px); transition: clip-path .7s var(--ease); }
+.menu[hidden] { display: flex; visibility: hidden; }
+.menu-open .menu { clip-path: circle(150% at calc(100% - 40px) 40px); visibility: visible; }
+.menu nav { display: grid; gap: 6px; }
+.menu nav a { font: 700 clamp(34px, 9.5vw, 56px)/1.05 var(--serif); text-transform: uppercase; text-decoration: none; display: flex; align-items: baseline; gap: 14px; opacity: 0; transform: translateY(30px); transition: opacity .5s, transform .7s var(--ease); }
+.menu nav a small { font: 600 13px var(--cond); letter-spacing: .2em; color: var(--crimson-hi); }
+.menu-open .menu nav a { opacity: 1; transform: none; }
+.menu-open .menu nav a:nth-child(1) { transition-delay: .15s; } .menu-open .menu nav a:nth-child(2) { transition-delay: .2s; } .menu-open .menu nav a:nth-child(3) { transition-delay: .25s; }
+.menu-open .menu nav a:nth-child(4) { transition-delay: .3s; } .menu-open .menu nav a:nth-child(5) { transition-delay: .35s; } .menu-open .menu nav a:nth-child(6) { transition-delay: .4s; }
+.menu-foot { margin-top: auto; color: var(--mute); font: 600 13px var(--cond); letter-spacing: .2em; text-transform: uppercase; }
+body.menu-open { overflow: hidden; }
+@media (max-width: 760px) {
+  .menu-btn { display: block; }
+  .pill { margin-left: auto; }
+  .nav { gap: 10px; }
+  .nav.solid { background: rgba(23, 23, 23, .94); }
+  .menu-open .nav { background: transparent; border-color: transparent; }
+  .logo span { font-size: 16px; }
+}
+@media (max-width: 380px) { .pill { display: none; } .menu-btn { margin-left: auto; } }
+
+/* ---------- Phone tuning ---------- */
+@media (max-width: 600px) {
+  .hero { padding-top: 96px; min-height: auto; padding-bottom: 70px; }
+  .hero h1 { font-size: clamp(46px, 14vw, 72px); }
+  .hero-phone { width: min(250px, 66vw); }
+  .chip { padding: 8px 12px; } .chip b { font-size: 17px; } .chip span { font-size: 11px; }
+  .chip.c1 { left: -16%; } .chip.c2 { right: -16%; }
+  .scroll-hint { display: none; }
+  .statement { padding: 6vh 0; }
+  .highlights { padding: 6vh var(--gutter) 10vh; }
+  .stats { margin-top: 36px; }
+  .stat b { font-size: 72px; }
+  .gallery { height: 300vh; }
+  .features { padding: 10vh var(--gutter); }
+  .grid { margin-top: 36px; }
+  .data, .start { padding: 12vh var(--gutter); }
+  .help { padding: 10vh var(--gutter); }
+  .btn { padding: 14px 22px; min-height: 48px; }
+  .ctas .btn { flex: 1 1 auto; justify-content: center; }
+}
 
 /* ---------- Own exercise (scroll demo) ---------- */
 .custom { height: 420vh; background: linear-gradient(180deg, var(--forest) 0%, var(--charcoal) 22%); }
@@ -282,6 +378,10 @@ section { position: relative; }
   .pin { position: static; height: auto; padding: 12vh 0; }
   .rail { width: auto; overflow-x: auto; }
   .custom { height: auto; }
+  .clip .screen { opacity: 1; transform: none; }
+  .glint { display: none; }
+  .ico path { stroke-dashoffset: 0; }
+  .menu { transition: none; }
   .custom-pin { position: static; height: auto; padding-block: 12vh; }
   .step p, .soon { max-height: none; opacity: 1; }
   .step { opacity: 1; }
