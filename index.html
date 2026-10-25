@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Gains Tracker – Trainingsbuch fürs Gym</title>
+<meta name="description" content="Krafttraining-App mit Animation für jede Übung, Trainingsplan mit automatischer Steigerung, Challenges und Wettkampf mit Freunden. Ohne Werbung, ohne Tracking.">
+<meta name="theme-color" content="#171717">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gains Tracker – Trainingsbuch fürs Gym">
+<meta property="og:description" content="Jede Übung als Animation, dein nächstes Gewicht mit Begründung, Wettkampf mit Freunden.">
+<meta property="og:image" content="assets/screens/1-training.jpg">
+<meta property="og:locale" content="de_CH">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<!-- Intro: the three brand colours arrive as cards, then lift away -->
+<div class="intro" aria-hidden="true">
+  <div class="swatch" style="--c:#171717;--i:0"><b>Charcoal<br>Black</b><i></i><small>#171717</small></div>
+  <div class="swatch" style="--c:#06110C;--i:1"><b>Forest<br>Green</b><i></i><small>#06110C</small></div>
+  <div class="swatch" style="--c:#A31C1B;--i:2"><b>Crimson<br>Red</b><i></i><small>#A31C1B</small></div>
+</div>
+
+<div class="progress" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="Gains Tracker, nach oben"><img src="assets/gains-tracker-zeichen.svg" alt="" width="34" height="34"><span>Gains Tracker</span></a>
+  <nav aria-label="Hauptmenü">
+    <a href="#funktionen">Funktionen</a>
+    <a href="#highlights">Highlights</a>
+    <a href="#daten">Deine Daten</a>
+    <a href="#hilfe">Hilfe</a>
+  </nav>
+  <a class="pill" href="#start">Bald im Store</a>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="beam" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="kicker" data-reveal>Gleiches Gym<br>Neuer Fortschritt</p>
+      <h1>
+        <span class="split red">Stärker</span>
+        <span class="split light">mit System.</span>
+      </h1>
+      <span class="rule" data-reveal></span>
+      <p class="lead" data-reveal>Dein Trainingsbuch fürs Gym: jede Übung als Animation, das nächste Gewicht mit Begründung und ein Wettkampf mit deinen Freunden.</p>
+      <div class="ctas" data-reveal>
+        <a class="btn magnet" href="#funktionen"><span>Entdecken</span><em aria-hidden="true">→</em></a>
+        <a class="btn ghost" href="#highlights">Was sie ausmacht</a>
+      </div>
+    </div>
+    <div class="hero-phone" data-tilt>
+      <div class="phone"><img src="assets/screens/1-training.jpg" alt="Trainingsseite von Gains Tracker mit Brusttag und Bankdrücken als Animation" width="600" height="1300"></div>
+      <div class="chip c1" data-float><b>80 × 11</b><span>Vorschlag heute</span></div>
+      <div class="chip c2" data-float><b>Rang Gold</b><span>86.9 t diesen Monat</span></div>
+    </div>
+    <a class="scroll-hint" href="#band" aria-label="Weiter nach unten"><span></span></a>
+  </section>
+
+  <!-- Running band -->
+  <div class="band" id="band" aria-hidden="true">
+    <div class="track">
+      <span>99 Übungen animiert</span><i>✦</i><span>Steigerung automatisch</span><i>✦</i><span>26 Challenges</span><i>✦</i><span>Wettkampf mit Freunden</span><i>✦</i><span>Kein Tracking</span><i>✦</i><span>Ohne Werbung</span><i>✦</i>
+      <span>99 Übungen animiert</span><i>✦</i><span>Steigerung automatisch</span><i>✦</i><span>26 Challenges</span><i>✦</i><span>Wettkampf mit Freunden</span><i>✦</i><span>Kein Tracking</span><i>✦</i><span>Ohne Werbung</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- Statement that slides with the scroll -->
+  <section class="statement" aria-label="Leitsatz">
+    <p class="slide-l" data-drift="-1">Kein Rätselraten</p>
+    <p class="slide-r red" data-drift="1">am Gerät.</p>
+  </section>
+
+  <!-- Highlights with counters -->
+  <section class="highlights" id="highlights">
+    <p class="eyebrow" data-reveal>Was Gains Tracker ausmacht</p>
+    <h2 class="display" data-reveal>Vier Zahlen,<br><em>ein Versprechen.</em></h2>
+    <div class="stats">
+      <div class="stat" data-reveal><b data-count="99">0</b><h3>Übungen in Bewegung</h3><p>Jede Übung läuft als Animation direkt in der Liste, mit Muskelkarte: rot arbeitet hauptsächlich, hell unterstützt.</p></div>
+      <div class="stat" data-reveal><b data-count="26">0</b><h3>Challenges</h3><p>Vom Klimmzug-Club bis zur längsten Plank, mit eigenen Abzeichen in Bronze, Silber, Gold und Legende.</p></div>
+      <div class="stat" data-reveal><b data-count="4">0</b><h3>Sprachen</h3><p>Deutsch, Englisch, Französisch und Italienisch, inklusive aller Anleitungen und Muskelnamen.</p></div>
+      <div class="stat" data-reveal><b data-count="0" class="zero">0</b><h3>Tracker, null Werbung</h3><p>Ohne Konto bleibt alles auf deinem Handy. Keine Werbung, keine Analyse-Dienste, kein Verkauf von Daten.</p></div>
+    </div>
+  </section>
+
+  <!-- Pinned horizontal gallery -->
+  <section class="gallery" id="funktionen" aria-label="Die App in sechs Bildern">
+    <div class="pin">
+      <div class="gallery-head">
+        <p class="eyebrow">Die App in Bewegung</p>
+        <h2 class="display">Sechs Gründe,<br><em>dranzubleiben.</em></h2>
+        <div class="meter" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="rail">
+        <figure class="slide"><img src="assets/screens/1-training.jpg" alt="Jede Übung als Animation" loading="lazy" width="600" height="1300"><figcaption><b>01</b> Jede Übung als Animation</figcaption></figure>
+        <figure class="slide"><img src="assets/screens/2-uebung.jpg" alt="Dein nächstes Gewicht" loading="lazy" width="600" height="1300"><figcaption><b>02</b> Dein nächstes Gewicht</figcaption></figure>
+        <figure class="slide"><img src="assets/screens/3-fortschritt.jpg" alt="Fortschritt mit Kurven" loading="lazy" width="600" height="1300"><figcaption><b>03</b> Fortschritt, der motiviert</figcaption></figure>
+        <figure class="slide"><img src="assets/screens/4-rangliste.jpg" alt="Rangliste mit Freunden" loading="lazy" width="600" height="1300"><figcaption><b>04</b> Rangliste mit Freunden</figcaption></figure>
+        <figure class="slide"><img src="assets/screens/5-challenges.jpg" alt="Challenges mit Abzeichen" loading="lazy" width="600" height="1300"><figcaption><b>05</b> Challenges mit Abzeichen</figcaption></figure>
+        <figure class="slide"><img src="assets/screens/6-eigene-uebung.jpg" alt="Eigene Übungen mit KI" loading="lazy" width="600" height="1300"><figcaption><b>06</b> Eigene Übungen mit KI</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature grid -->
+  <section class="features" aria-labelledby="f-title">
+    <p class="eyebrow" data-reveal>Funktionen</p>
+    <h2 class="display" id="f-title" data-reveal>Alles, was ein<br><em>Trainingsbuch braucht.</em></h2>
+    <div class="grid">
+      <article class="card" data-reveal><span class="no">01</span><h3>Animation und Muskelkarte</h3><p>Startposition, Endposition, sauberer Ablauf. Pausieren oder in Zeitlupe ansehen, wenn du die Technik genau sehen willst.</p></article>
+      <article class="card" data-reveal><span class="no">02</span><h3>Plan und Steigerung</h3><p>Ziel, Trainingstage und Ausrüstung wählen, der Plan steht. Bei jeder Übung steht, mit welchem Gewicht und wie vielen Wiederholungen du weitermachst, und warum.</p></article>
+      <article class="card" data-reveal><span class="no">03</span><h3>Sätze in Sekunden</h3><p>Die App schlägt die Gewichte vom letzten Mal vor. Aufwärmsätze, Drop-Sets, Sätze bis zum Versagen, Supersätze und Übungen auf Zeit mit einem Tipp.</p></article>
+      <article class="card" data-reveal><span class="no">04</span><h3>Erholung auf einen Blick</h3><p>Die Muskelkarte zeigt, welche Muskeln bereit sind und welche noch Pause brauchen. Nach sechs harten Wochen schlägt die App eine leichte Woche vor.</p></article>
+      <article class="card" data-reveal><span class="no">05</span><h3>Anleitung und Geräte</h3><p>Schritt-für-Schritt-Anleitung, häufige Fehler, leichtere und schwerere Varianten. Sitzhöhe und Polster speicherst du direkt bei der Übung, der Scheibenrechner zeigt die Scheiben.</p></article>
+      <article class="card" data-reveal><span class="no">06</span><h3>Tagesform und Beschwerden</h3><p>An schlechten Tagen schlägt die App weniger Gewicht vor. Das Schmerz-Tagebuch hilft, Beschwerden im Blick zu behalten.</p></article>
+      <article class="card" data-reveal><span class="no">07</span><h3>Wissen und Einsteiger-Kurs</h3><p>Kurze Artikel, ein Muskel-Lexikon, ein Eiweiss- und Kalorienrechner und ein Kurs mit zwölf Lektionen für die ersten Wochen im Gym.</p></article>
+      <article class="card" data-reveal><span class="no">08</span><h3>Watch, Health, Import</h3><p>Sätze an der Apple Watch erfassen, Trainings in Apple Health oder Health Connect speichern, Verlauf aus Strong oder Hevy übernehmen.</p></article>
+    </div>
+  </section>
+
+  <!-- Privacy promise on forest green -->
+  <section class="data" id="daten">
+    <div class="data-inner">
+      <p class="eyebrow" data-reveal>Deine Daten</p>
+      <h2 class="display" data-reveal>Gehören <em>dir.</em><br>Punkt.</h2>
+      <ul class="promises">
+        <li data-wipe><b>Ohne Konto</b><span>Alle Trainings bleiben auf deinem Handy. Ein Konto brauchst du nur für Cloud-Sicherung und Trainingspartner.</span></li>
+        <li data-wipe><b>Server in Europa</b><span>Wenn du die Cloud nutzt, liegen die Daten in einem Rechenzentrum in Frankfurt. Übertragen wird immer verschlüsselt.</span></li>
+        <li data-wipe><b>Kein Tracking</b><span>Keine Werbung, keine Analyse-Dienste, kein Fingerabdruck deines Geräts.</span></li>
+        <li data-wipe><b>Jederzeit löschen</b><span>Konto und Cloud-Daten löschst du in der App mit einem Tipp, sofort und vollständig.</span></li>
+      </ul>
+      <a class="btn light" href="datenschutz/" data-reveal><span>Datenschutzerklärung lesen</span><em aria-hidden="true">→</em></a>
+    </div>
+  </section>
+
+  <!-- Start / CTA -->
+  <section class="start" id="start">
+    <p class="eyebrow" data-reveal>Zum Start</p>
+    <h2 class="mega"><span class="split red">Alles</span> <span class="split light">gratis.</span></h2>
+    <p class="lead center" data-reveal>Damit eine Community entsteht, sind zum Start alle Funktionen frei, auch eigene Übungen mit KI, Cloud-Sicherung, Rangliste mit Freunden und die Apple Watch.</p>
+    <div class="stores" data-reveal>
+      <span class="store"><small>Bald im</small>App Store</span>
+      <span class="store"><small>Bald bei</small>Google Play</span>
+    </div>
+  </section>
+
+  <!-- Support: required by the App Store -->
+  <section class="help" id="hilfe">
+    <div class="help-col" data-reveal>
+      <h2 class="display small">Hilfe und Kontakt</h2>
+      <p>Fragen, Fehler oder Wünsche? Schreib an <a href="mailto:info@gainstracker.ch">info@gainstracker.ch</a>. Wir antworten in der Regel innerhalb von zwei Arbeitstagen.</p>
+    </div>
+    <div class="help-col" data-reveal>
+      <h3>Abo kündigen</h3>
+      <p>Ein Abo verwaltest du dort, wo du es abgeschlossen hast.<br>iPhone: Einstellungen → dein Name → Abonnements → Gains Tracker.<br>Android: Google Play → Profil → Zahlungen und Abos → Abos.</p>
+    </div>
+    <div class="help-col" data-reveal>
+      <h3>Konto löschen</h3>
+      <p>In der App unter Profil → Konto und Cloud → „Konto löschen“. Alle Daten in der Cloud werden sofort gelöscht. Die Daten auf deinem Handy bleiben, bis du die App entfernst.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-big" aria-hidden="true">Gains Tracker</div>
+  <div class="foot-row">
+    <span>© 2026 Phil Isele · Fabrikweg 294 · 4718 Holderbank · Schweiz</span>
+    <span><a href="datenschutz/">Datenschutz</a> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Nutzungsbedingungen</a> · <a href="mailto:info@gainstracker.ch">Kontakt</a></span>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

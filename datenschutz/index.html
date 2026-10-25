@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#171717">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="index,follow">
+<title>Datenschutzerklärung – Gains Tracker</title>
+<meta name="description" content="Datenschutzerklärung der App Gains Tracker: welche Daten die App bearbeitet, wo sie gespeichert werden und welche Rechte du hast.">
+<link rel="icon" type="image/png" href="../icon.png">
+<style>
+/* Datenschutz im Look der Webseite: Charcoal, Forest Green, Crimson. Inhalt aus docs/datenschutz.md der App. */
+@font-face{font-family:"Barlow Condensed";font-weight:700;font-display:swap;src:url("../assets/fonts/BarlowCondensed_700Bold.ttf") format("truetype")}
+:root{--bg:#171717;--paper:#1f1f1f;--ink:#ede8df;--muted:#a39e94;--line:rgba(237,232,223,.13);--accent:#e2453f;--tint:#0c2117;
+ --display:"Barlow Condensed","Arial Narrow",sans-serif;--serif:"Didot","Bodoni 72","Bodoni MT","Playfair Display","Times New Roman",serif;
+ --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+.stripe{height:280px;background:radial-gradient(120% 120% at 80% 0%,#0c2117 0%,#06110C 55%,#171717 100%);position:absolute;inset:0 0 auto;z-index:-1}
+.stripe::after{content:"";position:absolute;top:0;bottom:0;left:62%;width:120px;background:linear-gradient(180deg,rgba(163,28,27,.7),transparent);filter:blur(16px);transform:skewX(-14deg)}
+.wrap{max-width:780px;margin:0 auto;padding-block:32px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));animation:rise .9s cubic-bezier(.16,1,.3,1)}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+@media (prefers-reduced-motion:reduce){.wrap{animation:none}}
+.brand{font:700 15px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.brand::before{content:"← ";color:var(--accent)}
+h1{font:700 clamp(2.4rem,8vw,4.4rem)/.95 var(--serif);text-transform:uppercase;margin:60px 0 10px;text-wrap:balance;letter-spacing:-.01em}
+h2{font:700 1.45rem/1.15 var(--display);text-transform:uppercase;letter-spacing:.06em;margin:42px 0 8px;scroll-margin-top:16px;text-wrap:balance;color:var(--ink)}
+p,li{max-width:68ch;color:#d6d1c8}
+a{color:var(--accent)}
+strong{font-weight:650;color:var(--ink)}
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:8px 26px 28px}
+@media (max-width:480px){.sheet{padding:4px 14px 20px}}
+.toc{background:var(--tint);border:1px solid var(--line);border-radius:18px;padding:16px 20px;margin:24px 0}
+.toc b{font:700 13px var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.toc ol{columns:2 240px;margin:8px 0 0;padding-left:22px;font-size:.93rem}
+.toc li{margin:2px 0;break-inside:avoid}
+.toc a{color:var(--ink);text-decoration:none}.toc a:hover{color:var(--accent)}
+.sheet > p:first-child{margin-top:18px}
+.tbl{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:9px 11px;border-bottom:1px solid var(--line)}
+thead th{background:var(--tint);font-weight:650}
+tr:last-child td{border-bottom:0}
+.meta{color:var(--muted);font-size:.9rem}
+footer{margin-top:28px;color:var(--muted);font-size:.88rem;display:flex;flex-wrap:wrap;gap:6px 18px}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+<div class="wrap">
+<a class="brand" href="../">Gains Tracker</a>
+<h1>Datenschutz&shy;erklärung</h1>
+<p class="meta">Stand: 17. Oktober 2026</p>
+<nav class="toc" aria-label="Inhalt"><b>Inhalt</b><ol><li><a href="#z1">Verantwortlich</a></li><li><a href="#z2">Welche Daten die App bearbeitet</a></li><li><a href="#z3">Speicherung auf dem Handy</a></li><li><a href="#z4">Konto und Cloud-Sicherung (Pro, freiwillig)</a></li><li><a href="#z5">Apple Health, Health Connect und Apple Watch (Pro bzw. freiwillig)</a></li><li><a href="#z6">Trainingspartner und Rangliste (Pro, freiwillig, nur mit Konto)</a></li><li><a href="#z7">Eigene Übungen mit KI (Pro, freiwillig)</a></li><li><a href="#z8">Abo „Gains Tracker Pro“</a></li><li><a href="#z9">Weitere Funktionen auf dem Gerät</a></li><li><a href="#z10">Zwecke und Rechtsgrundlagen</a></li><li><a href="#z11">Aufbewahrung und Löschung</a></li><li><a href="#z12">Deine Rechte</a></li><li><a href="#z13">Sicherheit</a></li><li><a href="#z14">Kinder</a></li><li><a href="#z15">Keine Werbung, kein Tracking</a></li><li><a href="#z16">Änderungen</a></li></ol></nav>
+<article class="sheet">
+
+<p>Diese Erklärung beschreibt, welche Personendaten die App „Gains Tracker“ (iPhone, Apple Watch und Android) bearbeitet, wozu, wo sie gespeichert werden und welche Rechte du hast. Sie gilt nach dem Schweizer Datenschutzgesetz (DSG) und, soweit anwendbar, nach der EU-Datenschutz-Grundverordnung (DSGVO).</p>
+<p>Kurz zusammengefasst:</p>
+<ul>
+<li>Ohne Konto bleiben alle deine Daten auf deinem Handy.</li>
+<li>Es gibt keine Werbung, kein Tracking und keine Weitergabe zu Werbezwecken.</li>
+<li>Cloud, Trainingspartner, KI und Abo nutzt du nur, wenn du sie selbst einschaltest.</li>
+</ul>
+<h2 id="z1">1. Verantwortlich</h2>
+<p>Phil Isele<br />
+Fabrikweg 294<br />
+4718 Holderbank, Schweiz<br />
+E-Mail: info@gainstracker.ch</p>
+<p>Bei Fragen zum Datenschutz und für alle Anfragen nach Ziffer 12 erreichst du uns unter dieser Adresse.</p>
+<h2 id="z2">2. Welche Daten die App bearbeitet</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Daten</th>
+<th>Beispiele</th>
+<th>Wo gespeichert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trainingsdaten</td>
+<td>Übungen, Sätze, Gewichte, Wiederholungen, Sekunden, Satz-Markierungen, Datum, Uhrzeit des Speicherns</td>
+<td>auf dem Handy, mit Pro-Konto zusätzlich in der Cloud</td>
+</tr>
+<tr>
+<td>Trainingsplan und eigene Übungen</td>
+<td>Trainingstage, Übungen, Supersätze, Geräte-Einstellungen, eigene Übungen mit Name, Beschreibung und Muskeln</td>
+<td>auf dem Handy, mit Pro-Konto zusätzlich in der Cloud</td>
+</tr>
+<tr>
+<td>Profil</td>
+<td>Name, Geschlecht, Jahrgang, Grösse, Ziel, Zielgewicht</td>
+<td>auf dem Handy, mit Pro-Konto zusätzlich in der Cloud</td>
+</tr>
+<tr>
+<td>Körperdaten</td>
+<td>Körpergewicht, Körpermasse (z. B. Brust, Taille, Körperfett)</td>
+<td>auf dem Handy, mit Pro-Konto zusätzlich in der Cloud</td>
+</tr>
+<tr>
+<td>Fortschrittsfotos</td>
+<td>Fotos, die du aufnimmst oder auswählst</td>
+<td>nur auf dem Handy</td>
+</tr>
+<tr>
+<td>Konto</td>
+<td>E-Mail-Adresse, verschlüsseltes Passwort, Anmeldezeitpunkte</td>
+<td>in der Cloud (Supabase)</td>
+</tr>
+<tr>
+<td>Abo</td>
+<td>anonyme Kundennummer oder Konto-ID, gekauftes Abo, Laufzeit, Land, Kaufbelege der Stores</td>
+<td>bei RevenueCat und im App Store bzw. Google Play</td>
+</tr>
+<tr>
+<td>KI-Anfragen</td>
+<td>Name und Beschreibung einer eigenen Übung, auf Wunsch ein Foto</td>
+<td>kurzzeitig bei Anthropic, Zähler pro Tag in der Cloud</td>
+</tr>
+<tr>
+<td>Einstellungen</td>
+<td>Sprache, Wochenziel, Abzeichen, Pausenzeiten</td>
+<td>auf dem Handy</td>
+</tr>
+</tbody>
+</table></div>
+<p>Körpergewicht, Körpermasse, Fotos und Trainingsdaten können Rückschlüsse auf deine Gesundheit zulassen. Wir behandeln sie deshalb als <strong>besonders schützenswerte Personendaten</strong> (Art. 5 lit. c DSG) bzw. als <strong>Gesundheitsdaten</strong> (Art. 9 DSGVO).</p>
+<h2 id="z3">3. Speicherung auf dem Handy</h2>
+<p>Alles, was du eingibst, speichert die App zuerst nur auf deinem Gerät. Ohne Konto werden keine Trainings-, Körper- oder Profildaten an uns übermittelt. Wenn du die App löschst, werden diese Daten mitgelöscht. Fortschrittsfotos liegen im eigenen Speicherbereich der App und werden nie in die Cloud übertragen.</p>
+<h2 id="z4">4. Konto und Cloud-Sicherung (Pro, freiwillig)</h2>
+<p>Mit einem Konto werden deine Daten gesichert und auf deinen Geräten abgeglichen. Dafür speichern wir deine E-Mail-Adresse, dein Passwort (nur verschlüsselt als Prüfwert) und die in Ziffer 2 genannten Daten, ausser den Fotos.</p>
+<ul>
+<li><strong>Anbieter:</strong> Supabase Inc., USA, als Auftragsbearbeiter. Die Daten liegen in einem Rechenzentrum in der EU (Frankfurt, Deutschland).</li>
+<li><strong>Schutz:</strong> Die Übertragung ist verschlüsselt (TLS). Zugriffsregeln in der Datenbank sorgen dafür, dass nur du deine Daten lesen kannst. Die Anmeldung wird auf dem Handy verschlüsselt gespeichert.</li>
+<li><strong>E-Mails:</strong> Für die Bestätigung des Kontos und das Zurücksetzen des Passworts verschickt Supabase E-Mails an deine Adresse.</li>
+<li><strong>Weitergabe in die USA:</strong> Supabase kann für Betrieb und Support aus den USA auf Systeme zugreifen. Grundlage dafür sind die Standardvertragsklauseln der EU-Kommission bzw. die vom EDÖB anerkannten Klauseln sowie der Auftragsbearbeitungsvertrag (Data Processing Addendum) von Supabase.</li>
+</ul>
+<h2 id="z5">5. Apple Health, Health Connect und Apple Watch (Pro bzw. freiwillig)</h2>
+<ul>
+<li><strong>Apple Health (iPhone) bzw. Health Connect (Android):</strong> Wenn du die Verbindung einschaltest, speichert die App beendete Krafttrainings (Art, Beginn und Ende) und dein Körpergewicht dort. Auf deinen Wunsch liest sie dein neuestes Körpergewicht aus. Diese Daten gehen direkt zwischen App und Gesundheitsspeicher auf deinem Gerät hin und her und werden nicht über unsere Server übertragen. Sie werden nie für Werbung verwendet und nicht an Dritte weitergegeben. Den Zugriff kannst du jederzeit in den Einstellungen von Apple Health bzw. Health Connect entziehen.</li>
+<li><strong>Apple Watch:</strong> iPhone und Watch tauschen deinen heutigen Trainingstag, die Vorschläge und die am Handgelenk erfassten Sätze direkt über die Verbindung von Apple aus.</li>
+</ul>
+<h2 id="z6">6. Trainingspartner und Rangliste (Pro, freiwillig, nur mit Konto)</h2>
+<p>Wenn du unter „Trainingspartner“ das Teilen einschaltest, speichern wir in der Cloud:</p>
+<ul>
+<li>den Namen, den du dafür eingibst,</li>
+<li>deine Bestwerte pro Übung,</li>
+<li>dein bewegtes Gewicht pro Tag und Muskelgruppe der letzten zwei Monate (für die Rangliste),</li>
+<li>auf Wunsch deinen Trainingsplan.</li>
+</ul>
+<p>Nach dem ersten Teilen werden diese Werte nach jedem Training automatisch aktualisiert. Sehen können sie nur Personen, mit denen du dich über einen Einladungscode verbunden hast. Einladungscodes laufen nach 7 Tagen ab. Körpergewicht, Körpermasse, Fotos und dein vollständiger Trainingsverlauf werden nie geteilt. Mit „Nicht mehr teilen“ oder „Partnerschaft beenden“ entfernst du den Zugriff sofort.</p>
+<h2 id="z7">7. Eigene Übungen mit KI (Pro, freiwillig)</h2>
+<p>Wenn du eine eigene Übung erstellst, sucht die App die passende Animation und die Muskeln. Ohne Pro passiert das nur auf deinem Handy. Mit Pro kannst du dafür eine KI nutzen:</p>
+<ul>
+<li><strong>Was übermittelt wird:</strong> der Name und die Beschreibung der Übung, auf Wunsch ein Foto, und eine Liste der vorhandenen Animationen. Keine Trainings-, Körper- oder Profildaten.</li>
+<li><strong>Weg:</strong> Die Anfrage geht über unseren Server bei Supabase (EU) an Anthropic, PBC, USA (Modell Claude). Anthropic erhält dabei weder deine E-Mail-Adresse noch deine Konto-ID.</li>
+<li><strong>Bei Anthropic:</strong> Anthropic bearbeitet die Anfrage als Auftragsbearbeiter, verwendet sie nach den geschäftlichen Bedingungen nicht zum Training seiner Modelle und löscht Anfragen und Antworten automatisch innerhalb von 30 Tagen. Nur wenn eine Anfrage gegen die Nutzungsrichtlinien von Anthropic verstösst, kann Anthropic sie bis zu 2 Jahre aufbewahren.</li>
+<li><strong>Weitergabe in die USA:</strong> Grundlage sind die Standardvertragsklauseln im Auftragsbearbeitungsvertrag von Anthropic.</li>
+<li><strong>Bei uns:</strong> Wir speichern pro Konto nur, wie viele KI-Anfragen du an einem Tag gestellt hast (Schutz vor Missbrauch, höchstens 30 pro Tag). Das Ergebnis (Animation, Muskeln, Anleitung) speichert die App als eigene Übung bei dir.</li>
+<li>Bitte lade keine Fotos hoch, auf denen andere Personen erkennbar sind.</li>
+</ul>
+<h2 id="z8">8. Abo „Gains Tracker Pro“</h2>
+<p>Gains Tracker ist gratis. Pro kostet CHF 2.90 pro Monat oder CHF 28.00 pro Jahr (Preise in anderen Ländern legt der jeweilige Store fest), jeweils mit 7 Tagen Gratis-Test.</p>
+<ul>
+<li><strong>Bezahlung:</strong> Kauf, Zahlung und Kündigung laufen ausschliesslich über den App Store von Apple bzw. Google Play. Wir erhalten keine Zahlungs- oder Kartendaten. Für die Bearbeitung durch Apple bzw. Google gelten deren Datenschutzerklärungen.</li>
+<li><strong>Abo-Verwaltung:</strong> Um festzustellen, ob dein Abo aktiv ist, nutzen wir RevenueCat, Inc., USA, als Auftragsbearbeiter. RevenueCat erhält eine zufällige Kundennummer bzw. deine Konto-ID, die Kaufbelege des Stores, das gekaufte Produkt, Land, Währung, Gerätetyp, Betriebssystem- und App-Version sowie die IP-Adresse. Nicht übermittelt werden Trainings-, Körper- oder Profildaten. Grundlage für die Weitergabe in die USA sind die Standardvertragsklauseln im Auftragsbearbeitungsvertrag von RevenueCat.</li>
+<li><strong>Kündigen:</strong> in den Einstellungen deines Apple- bzw. Google-Kontos. Das Abo verlängert sich automatisch, wenn du es nicht mindestens 24 Stunden vor Ablauf kündigst.</li>
+</ul>
+<h2 id="z9">9. Weitere Funktionen auf dem Gerät</h2>
+<ul>
+<li><strong>Benachrichtigungen:</strong> Für die Satzpause plant die App lokale Benachrichtigungen auf deinem Gerät. Es werden keine Daten über einen Server verschickt. Dafür fragt die App um Erlaubnis.</li>
+<li><strong>Kamera und Mediathek:</strong> nur für Fortschrittsfotos und, auf Wunsch, ein Foto einer eigenen Übung. Dafür fragt die App um Erlaubnis.</li>
+<li><strong>Spracheingabe und Siri:</strong> Wenn du Sätze über das Mikrofon der Tastatur oder über einen Siri-Kurzbefehl einträgst, wandelt dein Betriebssystem die Sprache in Text um. Dafür gilt die Datenschutzerklärung von Apple bzw. Google. Die App erhält nur den fertigen Text.</li>
+<li><strong>Widget und Live-Aktivität:</strong> zeigen deinen nächsten Trainingstag, dein Wochenziel und die laufende Satzpause auf dem Home- bzw. Sperrbildschirm. Diese Angaben bleiben auf dem Gerät, sind aber für alle sichtbar, die deinen Bildschirm sehen.</li>
+<li><strong>Export und Import:</strong> Mit „Daten exportieren“ erstellt die App eine Datei und öffnet das Teilen-Menü. Wohin die Datei geht, bestimmst du. Beim Import liest die App nur die Datei, die du auswählst.</li>
+<li><strong>Sprache:</strong> Die App liest die eingestellte Sprache deines Geräts, um Deutsch oder Englisch anzuzeigen.</li>
+</ul>
+<h2 id="z10">10. Zwecke und Rechtsgrundlagen</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Zweck</th>
+<th>Rechtsgrundlage nach DSGVO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App-Funktionen, Cloud-Sicherung, Trainingspartner, KI, Abo</td>
+<td>Vertrag bzw. Nutzungsverhältnis (Art. 6 Abs. 1 lit. b)</td>
+</tr>
+<tr>
+<td>Bearbeitung und Speicherung von Gesundheitsdaten in der Cloud, Verbindung mit Apple Health bzw. Health Connect</td>
+<td>deine ausdrückliche Einwilligung (Art. 9 Abs. 2 lit. a), die du mit dem Einschalten der Funktion gibst und jederzeit widerrufen kannst</td>
+</tr>
+<tr>
+<td>Missbrauchsschutz (Tageslimit der KI), Sicherheit</td>
+<td>berechtigtes Interesse (Art. 6 Abs. 1 lit. f)</td>
+</tr>
+<tr>
+<td>Aufbewahrung von Belegen</td>
+<td>rechtliche Pflicht (Art. 6 Abs. 1 lit. c)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Nach dem DSG bearbeiten wir Personendaten nur für diese Zwecke, verhältnismässig und transparent. Besonders schützenswerte Daten geben wir nur mit deiner Einwilligung an die genannten Auftragsbearbeiter weiter.</p>
+<h2 id="z11">11. Aufbewahrung und Löschung</h2>
+<ul>
+<li>Daten auf dem Handy bleiben, bis du sie löschst oder die App entfernst.</li>
+<li>Unter Profil → Konto und Cloud → „Konto löschen“ löschst du dein Konto mit allen Daten in der Cloud endgültig, auch geteilte Werte, Partner-Verbindungen und den KI-Zähler. Das geschieht sofort; Sicherungskopien des Anbieters werden nach dessen Fristen überschrieben (in der Regel innerhalb von 30 Tagen).</li>
+<li>Der KI-Zähler pro Tag wird nach 90 Tagen automatisch gelöscht.</li>
+<li>Abo-Daten bei RevenueCat und den Stores werden nach deren Fristen und den gesetzlichen Aufbewahrungspflichten gelöscht.</li>
+</ul>
+<h2 id="z12">12. Deine Rechte</h2>
+<p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Bearbeitung, Datenherausgabe bzw. Datenübertragbarkeit und Widerspruch sowie das Recht, eine Einwilligung jederzeit zu widerrufen. Viele dieser Rechte kannst du direkt in der App ausüben: Daten exportieren (Auskunft, Übertragbarkeit), Einträge bearbeiten (Berichtigung), Konto löschen (Löschung), Funktionen ausschalten (Widerruf). Für alles andere schreib uns an die Adresse in Ziffer 1. Wir antworten innerhalb von 30 Tagen.</p>
+<p>Du kannst dich ausserdem bei einer Aufsichtsbehörde beschweren: in der Schweiz beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB), in der EU bei der Behörde deines Wohnsitzlandes.</p>
+<h2 id="z13">13. Sicherheit</h2>
+<p>Wir schützen deine Daten mit verschlüsselter Übertragung, verschlüsselter Speicherung der Anmeldung auf dem Gerät, Zugriffsregeln in der Datenbank und Auftragsbearbeitern mit vertraglichen Schutzpflichten. Geheime Schlüssel (zum Beispiel für die KI) liegen nur auf dem Server und nie in der App.</p>
+<h2 id="z14">14. Kinder</h2>
+<p>Die App richtet sich an Personen ab 16 Jahren. Jüngere brauchen die Zustimmung ihrer Eltern.</p>
+<h2 id="z15">15. Keine Werbung, kein Tracking</h2>
+<p>Die App enthält keine Werbung, keine Analyse- oder Tracking-Werkzeuge und verkauft keine Daten. Es findet keine automatisierte Entscheidung mit rechtlicher Wirkung statt. Die Vorschläge zur Steigerung berechnet die App auf deinem Handy nach festen Regeln.</p>
+<h2 id="z16">16. Änderungen</h2>
+<p>Wenn sich die App oder die beigezogenen Anbieter ändern, passen wir diese Erklärung an. Über wesentliche Änderungen informieren wir in der App. Es gilt die jeweils aktuelle Fassung unter https://gainstracker.ch/datenschutz.</p>
+</article>
+<footer><span>Gains Tracker · Phil Isele, Holderbank</span><span>Kontakt: info@gainstracker.ch</span></footer>
+</div>
+</body>
+</html>
