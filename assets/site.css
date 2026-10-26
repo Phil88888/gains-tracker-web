@@ -28,21 +28,6 @@ a { color: inherit; }
 h1, h2, h3, p { margin: 0; }
 ::selection { background: var(--crimson); color: #fff; }
 
-/* ---------- Intro ---------- */
-.intro { position: fixed; inset: 0; z-index: 100; background: var(--charcoal); display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 20px); pointer-events: none; }
-.swatch { width: clamp(92px, 22vw, 200px); aspect-ratio: 3 / 4.2; border-radius: 16px; background: var(--c); border: 1px solid rgba(255,255,255,.08); padding: clamp(10px, 2vw, 18px); display: flex; flex-direction: column; justify-content: flex-end; color: var(--cream);
-  box-shadow: 0 30px 60px rgba(0,0,0,.45); opacity: 0; transform: translateY(60px) rotate(calc((var(--i) - 1) * 6deg)) scale(.9);
-  animation: swatch-in .9s var(--ease) calc(var(--i) * .14s) forwards; }
-.swatch b { font: 400 clamp(13px, 2.4vw, 22px)/1.05 var(--serif); text-transform: uppercase; letter-spacing: .02em; }
-.swatch i { display: block; width: 26px; height: 1px; background: currentColor; opacity: .6; margin: 10px 0 8px; }
-.swatch small { font: 600 clamp(9px, 1.4vw, 12px) var(--cond); letter-spacing: .12em; opacity: .8; }
-@keyframes swatch-in { to { opacity: 1; transform: none; } }
-.intro.out { animation: intro-out .9s var(--ease) forwards; }
-.intro.out .swatch { animation: swatch-out .8s var(--ease) calc((2 - var(--i)) * .07s) forwards; opacity: 1; transform: none; }
-@keyframes swatch-out { to { transform: translateY(-120vh) rotate(calc((var(--i) - 1) * -8deg)); } }
-@keyframes intro-out { 0%, 40% { background-color: var(--charcoal); } 100% { background-color: transparent; visibility: hidden; } }
-.intro.gone { display: none; }
-
 /* ---------- Scroll progress + nav ---------- */
 .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; background: var(--crimson); transform-origin: 0 50%; transform: scaleX(0); }
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; gap: 24px; padding: 16px var(--gutter);
@@ -454,7 +439,6 @@ body.menu-open { overflow: hidden; }
 /* Calm version for people who turned animations off */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .intro { display: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   [data-reveal], [data-wipe], .split .l, .phone, .chip { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   .beam { transform: skewX(-14deg) scaleY(1); }

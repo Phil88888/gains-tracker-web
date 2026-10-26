@@ -23,25 +23,9 @@
   document.querySelectorAll(".hero .split").forEach((el, i) => splitText(el, i * 260));
   document.querySelectorAll(".mega .split").forEach((el, i) => splitText(el, i * 200));
 
-  /* Intro cards, shown once per visit */
-  const intro = document.querySelector(".intro");
-  const startPage = () => {
-    document.body.classList.add("ready");
-    document.querySelectorAll(".hero .split").forEach((el) => el.classList.add("on"));
-  };
-  let seen = false;
-  try { seen = sessionStorage.getItem("gt-intro") === "1"; } catch (e) {}
-  if (calm || seen) {
-    intro.classList.add("gone");
-    startPage();
-  } else {
-    try { sessionStorage.setItem("gt-intro", "1"); } catch (e) {}
-    setTimeout(() => {
-      intro.classList.add("out");
-      setTimeout(startPage, 250);
-      setTimeout(() => intro.classList.add("gone"), 1000);
-    }, 1500);
-  }
+  /* Start the hero animation right away */
+  document.body.classList.add("ready");
+  document.querySelectorAll(".hero .split").forEach((el) => el.classList.add("on"));
 
   /* One observer for everything that appears once: blocks, wipe lists, split headings, counters, clips */
   const countUp = (el) => {
