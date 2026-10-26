@@ -193,44 +193,6 @@
     custom.dataset.stage = 3;
   }
 
-  /* ---------- The arm logs three sets, then a new record; runs only while visible ---------- */
-  const scene = document.querySelector(".lift-scene");
-  if (scene) {
-    const rows = [...scene.querySelectorAll(".ls-row")];
-    const SETS = [["80", "10"], ["80", "10"], ["82.5", "10"]];
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-    let visible = false, running = false;
-    const tap = async () => { scene.classList.add("tap"); await sleep(170); scene.classList.remove("tap"); };
-    const type = async (el, text) => { el.classList.add("typing"); for (const ch of text) { el.textContent += ch; await tap(); await sleep(110); } el.classList.remove("typing"); };
-    const reset = () => { rows.forEach((r) => { r.classList.remove("done", "active"); r.querySelectorAll("span").forEach((s) => { s.textContent = ""; }); }); scene.classList.remove("rest", "pr"); };
-    const play = async () => {
-      if (running) return;
-      running = true;
-      while (visible) {
-        reset();
-        await sleep(500);
-        for (let i = 0; i < rows.length && visible; i++) {
-          rows[i].classList.add("active");
-          await type(rows[i].querySelector(".kg"), SETS[i][0]);
-          await sleep(150);
-          await type(rows[i].querySelector(".rep"), SETS[i][1]);
-          await sleep(200); await tap();
-          rows[i].classList.replace("active", "done");
-          scene.classList.add("rest"); await sleep(900); scene.classList.remove("rest");
-        }
-        if (!visible) break;
-        scene.classList.add("pr"); await sleep(2200);
-      }
-      running = false;
-    };
-    if (calm) {
-      rows.forEach((r, i) => { r.classList.add("done"); r.querySelector(".kg").textContent = SETS[i][0]; r.querySelector(".rep").textContent = SETS[i][1]; });
-      scene.classList.add("pr");
-    } else {
-      new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) play(); }, { threshold: 0.4 }).observe(scene);
-    }
-  }
-
   /* ---------- Menu on phones: a circle opens from the button ---------- */
   const menuBtn = document.querySelector(".menu-btn");
   const menu = document.getElementById("menu");
